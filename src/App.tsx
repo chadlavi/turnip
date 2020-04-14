@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 
 const numberWithCommas = (x: string | number) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
 const App = () => {
