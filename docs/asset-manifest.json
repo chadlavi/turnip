@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/turnip/static/css/main.038043c3.chunk.css",
-    "main.js": "/turnip/static/js/main.835fe09c.chunk.js",
-    "main.js.map": "/turnip/static/js/main.835fe09c.chunk.js.map",
+    "main.css": "/turnip/static/css/main.c40e5a87.chunk.css",
+    "main.js": "/turnip/static/js/main.bc0bcc06.chunk.js",
+    "main.js.map": "/turnip/static/js/main.bc0bcc06.chunk.js.map",
     "runtime-main.js": "/turnip/static/js/runtime-main.affa5613.js",
     "runtime-main.js.map": "/turnip/static/js/runtime-main.affa5613.js.map",
     "static/js/2.968f1ab5.chunk.js": "/turnip/static/js/2.968f1ab5.chunk.js",
     "static/js/2.968f1ab5.chunk.js.map": "/turnip/static/js/2.968f1ab5.chunk.js.map",
     "index.html": "/turnip/index.html",
-    "precache-manifest.ecd6e7e775017ee37516cb568afb312d.js": "/turnip/precache-manifest.ecd6e7e775017ee37516cb568afb312d.js",
+    "precache-manifest.1f34d7b71f870d65f8d26f1594f94207.js": "/turnip/precache-manifest.1f34d7b71f870d65f8d26f1594f94207.js",
     "service-worker.js": "/turnip/service-worker.js",
-    "static/css/main.038043c3.chunk.css.map": "/turnip/static/css/main.038043c3.chunk.css.map",
+    "static/css/main.c40e5a87.chunk.css.map": "/turnip/static/css/main.c40e5a87.chunk.css.map",
     "static/js/2.968f1ab5.chunk.js.LICENSE.txt": "/turnip/static/js/2.968f1ab5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.affa5613.js",
     "static/js/2.968f1ab5.chunk.js",
-    "static/css/main.038043c3.chunk.css",
-    "static/js/main.835fe09c.chunk.js"
+    "static/css/main.c40e5a87.chunk.css",
+    "static/js/main.bc0bcc06.chunk.js"
   ]
 }

@@ -92,6 +92,14 @@ const App = () => {
               </button>
             </p>
           </div>
+          <a
+            className='github-link'
+            href='https://github.com/chadlavi/turnip'
+            rel='noopener noreferrer'
+            target='_blank'
+          >
+            https://github.com/chadlavi/turnip
+          </a>
         </div>
 
       </div>
