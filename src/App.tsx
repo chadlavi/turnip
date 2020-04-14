@@ -52,7 +52,7 @@ const App = () => {
   return (
     <>
       <h1>Turnip calc</h1>
-      <div className='app'>
+      <main className='app'>
         <form id='inputs'>
           {fields.map((f) => {
             const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,8 +101,7 @@ const App = () => {
             https://github.com/chadlavi/turnip
           </a>
         </div>
-
-      </div>
+      </main>
     </>
   )
 }
