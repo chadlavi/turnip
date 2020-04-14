@@ -1,6 +1,7 @@
 {
   "name": "turnips",
   "version": "0.1.0",
+  "homepage": "https://chadlavi.github.io/turnip/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
