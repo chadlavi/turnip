@@ -2,6 +2,7 @@
   --background: white;
   --button: #ddd;
   --green: green;
+  --link: #55e;
   --red: #e30101;
   --text-color: #111;
 }
@@ -11,6 +12,7 @@
     --background: #111;
     --button: #333;
     --green: #019901;
+    --link: #6c6cf0;
     --red: red;
     --text-color: white;
   }
@@ -113,6 +115,7 @@ p.bad {
 a.github-link {
   text-align: right;
   font-size: 80%;
+  color: var(--link);
 }
 
 @media (max-width: 600px) {
