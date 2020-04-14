@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "89153af32d34f898227c2377b78e18c9",
+    "revision": "56ba8bd26a9560c3c9e233902b55694b",
     "url": "/turnip/index.html"
   },
   {
-    "revision": "7b64f68f290f289b5968",
+    "revision": "235341c3dc891e6a1300",
     "url": "/turnip/static/css/main.5915e2cf.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/turnip/static/js/2.968f1ab5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7b64f68f290f289b5968",
-    "url": "/turnip/static/js/main.a3461d48.chunk.js"
+    "revision": "235341c3dc891e6a1300",
+    "url": "/turnip/static/js/main.ea61a754.chunk.js"
   },
   {
     "revision": "966b82f41949f260867c",

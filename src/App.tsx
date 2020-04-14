@@ -56,22 +56,22 @@ const App = () => {
         <form id='inputs'>
           {fields.map((f) => {
             const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-              const newValue = e.target.value
+              const newValue = e.target.value || f.value.replace(/[a-z]/gi, '')
               f.onChange(newValue)
               localStorage.setItem(f.id, newValue)
             }
             return (
-              <label key={`${f.id}-${f.value}`}>
-                <span>{f.label}</span>
-                <input
-                  id={f.id}
-                  onChange={onChange}
-                  type={f.type}
-                  value={f.value}
-                />
-              </label>
-            )
-          })}
+            <label key={f.id}>
+              <span>{f.label}</span>
+              <input
+                name={f.id}
+                type={f.type}
+                value={f.value}
+                onChange={onChange}
+                id={f.id}
+              />
+            </label>
+          )})}
         </form>
         <div>
           <div id='results'>
@@ -82,7 +82,7 @@ const App = () => {
               Gross: {numberWithCommas(gross)}
             </p>
             <p className={profitable ? 'good' : lossful ? 'bad' : undefined}>
-        {!lossful ? 'Profit' : 'Loss'}: {numberWithCommas(profit)} ({profitable && '+'}{profitPercentage}%)
+            {!lossful ? 'Profit' : 'Loss'}: {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
             </p>
             <p className='button-row'>
               <button
