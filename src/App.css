@@ -1,38 +1,119 @@
-.App {
-  text-align: center;
+:root {
+  --background: white;
+  --green: green;
+  --red: #e30101;
+  --text-color: #111;
+  --button: #ddd;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #111;
+    --green: #019901;
+    --red: red;
+    --text-color: white;
+    --button: #333;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  color: var(--text-color);
+  background-color: var(--background);
+}
+
+div.app {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+div.app > * {
+  display: flex;
+  flex-basis: 50%;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
-.App-link {
-  color: #61dafb;
+#inputs label, button {
+  display: block;
+  margin-bottom: 8px;
+}
+#inputs label span {
+  font-size: 80%;
+  display: block;
+  margin-bottom: 2px;
+  opacity: 0.8;
+}
+#inputs input {
+  background-color: inherit;
+  border-radius: 4px;
+  border: 1px solid;
+  color: inherit;
+  display: block;
+  font-size: inherit;
+  height: 100%;
+  padding: 4px;
+  text-align: right;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+p.button-row {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#clear-button {
+  background: var(--button);
+  color: inherit;
+  font-size: 80%;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 12px;
+  margin: 0;
+}
+
+#results {
+  border-radius: 4px;
+  border: 1px solid;
+  flex-basis: 100%;
+  font-weight: bold;
+  margin-bottom: 8px;
+  margin-top: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+p.good {
+  color: var(--green);
+}
+p.bad {
+  color: var(--red);
+}
+
+@media (max-width: 600px) {
+  div.app > form, div.app > div {
+    flex-basis: 100%;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
