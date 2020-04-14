@@ -61,16 +61,17 @@ const App = () => {
               localStorage.setItem(f.id, newValue)
             }
             return (
-            <label key={f.id}>
-              <span>{f.label}</span>
-              <input
-                type={f.type}
-                value={f.value}
-                onChange={onChange}
-                id={f.id}
-              />
-            </label>
-          )})}
+              <label key={`${f.id}-${f.value}`}>
+                <span>{f.label}</span>
+                <input
+                  id={f.id}
+                  onChange={onChange}
+                  type={f.type}
+                  value={f.value}
+                />
+              </label>
+            )
+          })}
         </form>
         <div>
           <div id='results'>
@@ -80,8 +81,8 @@ const App = () => {
             <p>
               Gross: {numberWithCommas(gross)}
             </p>
-            <p className={profitable ? 'good' : lossful ? 'bad' : ''}>
-              {!lossful ? 'Profit' : 'Loss'}: {numberWithCommas(profit)} ({profitPercentage}%)
+            <p className={profitable ? 'good' : lossful ? 'bad' : undefined}>
+        {!lossful ? 'Profit' : 'Loss'}: {numberWithCommas(profit)} ({profitable && '+'}{profitPercentage}%)
             </p>
             <p className='button-row'>
               <button
