@@ -1,62 +1,96 @@
 import React from 'react'
 import './App.css'
+import { History } from './History'
+import { calculate, numberWithCommas } from './calculation'
 
-const numberWithCommas = (x: string | number) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-}
+const defaultQuantity = localStorage.getItem('quantity') || ''
+const defaultInitialPrice = localStorage.getItem('initialPrice') || ''
+const defaultCurrentPrice = localStorage.getItem('currentPrice') || ''
+const defaultHistory = localStorage.getItem('history') || '[]'
 
 const App = () => {
-  const [quantity, setQuantity] = React.useState<string>(localStorage.getItem('quantity') || '')
-  const [initialPrice, setInitialPrice] = React.useState<string>(localStorage.getItem('initialPrice') || '')
-  const [currentPrice, setCurrentPrice] = React.useState<string>(localStorage.getItem('currentPrice') || '')
-
-  const onClearAll = (e:  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault()
-    setQuantity('')
-    setInitialPrice('')
-    setCurrentPrice('')
-    localStorage.clear()
-  }
-
-  const investment = parseFloat(quantity) * parseFloat(initialPrice) || 0
-  const gross = parseFloat(quantity) * parseFloat(currentPrice) || 0
-  const profit = gross - investment
-  const profitPercentage = (100 * (profit / investment) || 0).toFixed(2)
-  const profitable = profit > 0
-  const lossful = profit < 0
+  const [quantity, setQuantity] = React.useState<string>(defaultQuantity)
+  const [initialPrice, setInitialPrice] = React.useState<string>(defaultInitialPrice)
+  const [currentPrice, setCurrentPrice] = React.useState<string>(defaultCurrentPrice)
+  const [history, setHistory] = React.useState<string>(defaultHistory)
 
   const fields = [
     {
       label: 'Quantity',
-      type: 'number',
       value: quantity,
       onChange: setQuantity,
       id: 'quantity',
     },
     {
       label: 'Initial price',
-      type: 'number',
       value: initialPrice,
       onChange: setInitialPrice,
       id: 'initialPrice',
     },
     {
       label: 'Current price',
-      type: 'number',
       value: currentPrice,
       onChange: setCurrentPrice,
       id: 'currentPrice',
     },
   ]
 
+  const quantityNumber = parseFloat(quantity) || 0
+  const initialPriceNumber = parseFloat(initialPrice) || 0
+  const currentPriceNumber = parseFloat(currentPrice) || 0
+
+  const {
+    gross,
+    investment,
+    lossful,
+    profit,
+    profitable,
+    profitPercentage,
+  } = calculate({
+    currentPrice: currentPriceNumber,
+    initialPrice: initialPriceNumber,
+    quantity: quantityNumber,
+  })
+
+  const onReset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    setQuantity('')
+    setInitialPrice('')
+    setCurrentPrice('')
+    fields.forEach((f) => localStorage.removeItem(f.id))
+  }
+
+  const onSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    const history: History = JSON.parse(localStorage.getItem('history') || '[]')
+    const newHistory: History = [
+      ...history,
+      {
+        time: new Date(),
+        quantity: quantityNumber,
+        initialPrice: initialPriceNumber,
+        currentPrice: currentPriceNumber,
+        investment,
+        gross,
+        profit,
+      }
+    ]
+    const newHistoryString = JSON.stringify(newHistory)
+    setHistory(newHistoryString)
+    localStorage.setItem('history', newHistoryString)
+  }
+
+  const noInput = quantity.length === 0 && initialPrice.length === 0 && currentPrice.length === 0
+  const noData = investment === 0 && profit === 0 && gross === 0
+
   return (
     <>
       <h1>Turnip calc</h1>
       <main className='app'>
-        <form id='inputs'>
+        <form id='inputs' className='half'>
           {fields.map((f) => {
             const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-              const newValue = e.target.value || f.value.replace(/[a-z]/gi, '')
+              const newValue = e.target.value.replace(/[a-zA-Z]/gi, '')
               f.onChange(newValue)
               localStorage.setItem(f.id, newValue)
             }
@@ -64,17 +98,28 @@ const App = () => {
             <label key={f.id}>
               <span>{f.label}</span>
               <input
-                name={f.id}
-                type={f.type}
-                value={f.value}
-                onChange={onChange}
                 id={f.id}
+                name={f.id}
+                onChange={onChange}
+                type={'text'}
+                value={f.value}
               />
             </label>
           )})}
+          <p className='button-row'>
+            <button
+              id='clear-button'
+              onClick={onReset}
+              disabled={noInput}
+              type={'button'}
+            >
+              reset fields
+            </button>
+          </p>
         </form>
-        <div>
+        <div className='half'>
           <div id='results'>
+        <div>
             <p>
               Investment: {numberWithCommas(investment)}
             </p>
@@ -84,17 +129,22 @@ const App = () => {
             <p className={profitable ? 'good' : lossful ? 'bad' : undefined}>
             {!lossful ? 'Profit' : 'Loss'}: {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
             </p>
+            </div>
             <p className='button-row'>
               <button
-                id='clear-button'
-                onClick={onClearAll}
+                id='save-button'
+                onClick={onSave}
+                disabled={noData}
               >
-                clear all
+                save
               </button>
+
             </p>
           </div>
+        </div>
+        <History setHistory={setHistory} history={JSON.parse(history)} />
+        <div className='github-link'>
           <a
-            className='github-link'
             href='https://github.com/chadlavi/turnip'
             rel='noopener noreferrer'
             target='_blank'

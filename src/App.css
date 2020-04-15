@@ -5,21 +5,29 @@
   --link: #55e;
   --red: #e30101;
   --text-color: #111;
+  --main-width: 760px;
+  --zebra: #f2f2f2;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #111;
     --button: #333;
-    --green: #019901;
+    --green: #02a402;
     --link: #6c6cf0;
-    --red: red;
+    --red: #ff4747;
     --text-color: white;
+    --zebra: #242424;
   }
 }
 
 * {
   box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--link);
 }
 
 body {
@@ -29,13 +37,13 @@ body {
   font-size: 16px;
 }
 
-h1 {
+h1, h2 {
   padding-bottom: 16px;
 }
 
-h1, main.app {
+h1, h2, main.app {
   margin: auto;
-  max-width: 760px;
+  max-width: var(--main-width);
   width: 100%;
 }
 
@@ -43,11 +51,11 @@ main.app {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-bottom: 60px;
 }
 
 main.app > * {
-  display: flex;
-  flex-basis: 50%;
+  flex-basis: 100%;
   flex-direction: column;
   flex-grow: 1;
   flex-shrink: 1;
@@ -55,7 +63,12 @@ main.app > * {
   padding-right: 8px;
 }
 
-#inputs label, button {
+main.app > .half {
+  display: flex;
+  flex-basis: 50%;
+}
+
+#inputs label {
   display: block;
   margin-bottom: 8px;
 }
@@ -72,7 +85,6 @@ main.app > * {
   color: inherit;
   display: block;
   font-size: inherit;
-  height: 100%;
   padding: 4px;
   text-align: right;
   width: 100%;
@@ -93,38 +105,90 @@ p.button-row {
   flex-direction: row-reverse;
 }
 
-#clear-button {
+button {
   background: var(--button);
   border-radius: 8px;
   border: none;
   color: inherit;
-  font-size: 80%;
+  font-size: 0.8rem;
+  height: 24px;
   margin: 0;
   padding: 4px 12px;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+button#save-button:not(:disabled) {
+  background-color: var(--link);
+  color: var(--background);
 }
 
 #results {
   border-radius: 4px;
   border: 1px solid;
+  display: flex;
   flex-basis: 100%;
+  flex-direction: column;
   font-weight: bold;
+  justify-content: space-between;
   margin-bottom: 8px;
   margin-top: 16px;
   padding-left: 16px;
   padding-right: 16px;
 }
 
-p.good {
+.good {
   color: var(--green);
 }
-p.bad {
+.bad {
   color: var(--red);
 }
 
-a.github-link {
+a, a:visited {
+  color: var(--link);
+}
+
+.github-link {
   text-align: right;
   font-size: 80%;
-  color: var(--link);
+}
+
+#history-header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+#history-container {
+  overflow-x: auto;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 16px;
+}
+
+table {
+  border-collapse: collapse;
+  flex-basis: 100%;
+  width: var(--main-width);
+}
+
+thead tr th {
+  font-weight: normal;
+  font-size: 0.8rem;
+  padding-bottom: 0;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: var(--zebra);
 }
 
 @media (max-width: 600px) {
