@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import './Turnip.css'
 import { History } from './History'
 import { calculate, numberWithCommas } from './calculation'
 
@@ -8,7 +8,7 @@ const defaultInitialPrice = localStorage.getItem('initialPrice') || ''
 const defaultCurrentPrice = localStorage.getItem('currentPrice') || ''
 const defaultHistory = localStorage.getItem('history') || '[]'
 
-const App = () => {
+const Turnip = () => {
   const [quantity, setQuantity] = React.useState<string>(defaultQuantity)
   const [initialPrice, setInitialPrice] = React.useState<string>(defaultInitialPrice)
   const [currentPrice, setCurrentPrice] = React.useState<string>(defaultCurrentPrice)
@@ -70,9 +70,6 @@ const App = () => {
         quantity: quantityNumber,
         initialPrice: initialPriceNumber,
         currentPrice: currentPriceNumber,
-        investment,
-        gross,
-        profit,
       }
     ]
     const newHistoryString = JSON.stringify(newHistory)
@@ -157,4 +154,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Turnip

@@ -7,9 +7,6 @@ export interface HistoryItem {
   quantity: number,
   initialPrice: number,
   currentPrice: number,
-  investment: number,
-  gross: number,
-  profit: number,
 }
 
 export type History = (HistoryItem | undefined)[]
@@ -57,7 +54,9 @@ export const History = (props: {history: History, setHistory: React.Dispatch<Rea
               .map((h, i) => {
                 if (h){
                   const {
+                    gross,
                     lossful,
+                    profit,
                     profitable,
                     profitPercentage,
                   } = calculate({
@@ -77,12 +76,12 @@ export const History = (props: {history: History, setHistory: React.Dispatch<Rea
                         {numberWithCommas(h.currentPrice)}
                       </td>
                       <td>
-                        {numberWithCommas(h.gross)}
+                        {numberWithCommas(gross)}
                       </td>
                       <td
                         className={profitable ? 'good' : lossful ? 'bad' : undefined}
                       >
-                        {numberWithCommas(h.profit)} ({profitable ? '+' : ''}{profitPercentage}%)
+                        {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
                       </td>
                       <td>
                         {formatDate(new Date(h.time))}

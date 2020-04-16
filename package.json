@@ -14,13 +14,15 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "tslint": "^6.1.1",
     "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "rm -rf docs && react-scripts build && cp -r build docs",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "node ./node_modules/tslint/bin/tslint --project . --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
