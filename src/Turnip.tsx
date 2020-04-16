@@ -8,7 +8,7 @@ const defaultInitialPrice = localStorage.getItem('initialPrice') || ''
 const defaultCurrentPrice = localStorage.getItem('currentPrice') || ''
 const defaultHistory = localStorage.getItem('history') || '[]'
 
-const Turnip = () => {
+const Turnip = (): JSX.Element => {
   const [quantity, setQuantity] = React.useState<string>(defaultQuantity)
   const [initialPrice, setInitialPrice] = React.useState<string>(defaultInitialPrice)
   const [currentPrice, setCurrentPrice] = React.useState<string>(defaultCurrentPrice)
@@ -52,7 +52,7 @@ const Turnip = () => {
     quantity: quantityNumber,
   })
 
-  const onReset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onReset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.preventDefault()
     setQuantity('')
     setInitialPrice('')
@@ -60,7 +60,7 @@ const Turnip = () => {
     fields.forEach((f) => localStorage.removeItem(f.id))
   }
 
-  const onSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.preventDefault()
     const history: History = JSON.parse(localStorage.getItem('history') || '[]')
     const newHistory: History = [
@@ -86,23 +86,23 @@ const Turnip = () => {
       <main className='app'>
         <form id='inputs' className='half'>
           {fields.map((f) => {
-            const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
               const newValue = e.target.value.replace(/[a-zA-Z]/gi, '')
               f.onChange(newValue)
               localStorage.setItem(f.id, newValue)
             }
             return (
-            <label key={f.id}>
-              <span>{f.label}</span>
-              <input
-                id={f.id}
-                name={f.id}
-                onChange={onChange}
-                type={'text'}
-                value={f.value}
-              />
-            </label>
-          )})}
+              <label key={f.id}>
+                <span>{f.label}</span>
+                <input
+                  id={f.id}
+                  name={f.id}
+                  onChange={onChange}
+                  type={'text'}
+                  value={f.value}
+                />
+              </label>
+            )})}
           <p className='button-row'>
             <button
               id='clear-button'
@@ -116,16 +116,16 @@ const Turnip = () => {
         </form>
         <div className='half'>
           <div id='results'>
-        <div>
-            <p>
+            <div>
+              <p>
               Investment: {numberWithCommas(investment)}
-            </p>
-            <p>
+              </p>
+              <p>
               Gross: {numberWithCommas(gross)}
-            </p>
-            <p className={profitable ? 'good' : lossful ? 'bad' : undefined}>
-            {!lossful ? 'Profit' : 'Loss'}: {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
-            </p>
+              </p>
+              <p className={profitable ? 'good' : lossful ? 'bad' : undefined}>
+                {!lossful ? 'Profit' : 'Loss'}: {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
+              </p>
             </div>
             <p className='button-row'>
               <button

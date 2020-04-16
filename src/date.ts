@@ -1,4 +1,4 @@
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date): string => {
   const now = new Date()
   const dateString = date.toDateString()
   const isToday = now.toDateString() === dateString

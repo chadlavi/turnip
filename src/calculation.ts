@@ -1,10 +1,19 @@
 export interface CalculateProps {
-  currentPrice: number,
-  initialPrice: number,
-  quantity: number,
+    currentPrice: number
+    initialPrice: number
+    quantity: number
 }
 
-export const calculate = (props: CalculateProps) => {
+export interface CalculateReturn {
+  gross: number
+  investment: number
+  lossful: boolean
+  profit: number
+  profitable: boolean
+  profitPercentage: string
+}
+
+export const calculate = (props: CalculateProps): CalculateReturn => {
   const investment = props.quantity * props.initialPrice
   const gross = props.quantity * props.currentPrice
   const profit = gross - investment
@@ -21,6 +30,6 @@ export const calculate = (props: CalculateProps) => {
   }
 }
 
-export const numberWithCommas = (x: string | number) => {
-  return (x || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-}
+export const numberWithCommas = (x: string | number): string => (x || 0)
+  .toString()
+  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')

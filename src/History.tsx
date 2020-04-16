@@ -3,15 +3,17 @@ import { formatDate } from './date'
 import { calculate, numberWithCommas } from './calculation'
 
 export interface HistoryItem {
-  time: Date
-  quantity: number,
-  initialPrice: number,
-  currentPrice: number,
+    time: Date
+    quantity: number
+    initialPrice: number
+    currentPrice: number
 }
 
 export type History = (HistoryItem | undefined)[]
 
-export const History = (props: {history: History, setHistory: React.Dispatch<React.SetStateAction<string>>}) => {
+export const History = (
+  props: {history: History; setHistory: React.Dispatch<React.SetStateAction<string>>}
+): JSX.Element | null => {
   const{
     history,
     setHistory,
@@ -19,7 +21,7 @@ export const History = (props: {history: History, setHistory: React.Dispatch<Rea
 
   const hasHistory = history.length > 0
 
-  const onClearHistory = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onClearHistory = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.preventDefault()
     setHistory('[]')
     localStorage.removeItem('history')
