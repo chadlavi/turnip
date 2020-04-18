@@ -99,6 +99,7 @@ const Turnip = (): JSX.Element => {
                   name={f.id}
                   onChange={onChange}
                   type={'text'}
+                  pattern={'[0-9]*'}
                   value={f.value}
                 />
               </label>

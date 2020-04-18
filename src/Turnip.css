@@ -88,6 +88,7 @@ main.app > .half {
   padding: 4px;
   text-align: right;
   width: 100%;
+  -webkit-appearance: none;
 }
 
 input[type=number] {
@@ -192,7 +193,7 @@ tr:nth-child(even) {
 }
 
 @media (max-width: 600px) {
-  main.app > form, main.app > div {
+  main.app > form, main.app > div, main.app .half {
     flex-basis: 100%;
     padding-left: 0;
     padding-right: 0;
