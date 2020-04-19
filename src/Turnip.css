@@ -7,17 +7,21 @@
   --text-color: #111;
   --main-width: 760px;
   --zebra: #f2f2f2;
+  --results-background: var(--background);
+  --results-shadow: #8884;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #111;
-    --button: #333;
+    --button: #555;
     --green: #02a402;
     --link: #6c6cf0;
     --red: #ff4747;
     --text-color: white;
     --zebra: #242424;
+    --results-background: var(--zebra);
+    --results-shadow: #0004;
   }
 }
 
@@ -75,20 +79,20 @@ main.app > .half {
 #inputs label span {
   font-size: 80%;
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   opacity: 0.8;
 }
 #inputs input {
-  background-color: inherit;
-  border-radius: 4px;
-  border: 1px solid;
-  color: inherit;
+  -webkit-appearance: none;
+  background-color: var(--background);
+  border-radius: 8px;
+  border: 1px solid var(--button);
+  color: var(--text-color);
   display: block;
   font-size: inherit;
-  padding: 4px;
+  padding: 12px;
   text-align: right;
   width: 100%;
-  -webkit-appearance: none;
 }
 
 input[type=number] {
@@ -112,9 +116,8 @@ button {
   border: none;
   color: inherit;
   font-size: 0.8rem;
-  height: 24px;
   margin: 0;
-  padding: 4px 12px;
+  padding: 8px 16px;
 }
 
 button:disabled {
@@ -127,8 +130,8 @@ button#save-button:not(:disabled) {
 }
 
 #results {
-  border-radius: 4px;
-  border: 1px solid;
+  background: var(--results-background);
+  border-radius: 16px;
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
@@ -138,6 +141,7 @@ button#save-button:not(:disabled) {
   margin-top: 16px;
   padding-left: 16px;
   padding-right: 16px;
+  box-shadow: 2px 3px 5px 2px var(--results-shadow);
 }
 
 .good {

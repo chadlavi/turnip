@@ -3,41 +3,41 @@ import './Turnip.css'
 import { History } from './History'
 import { calculate, numberWithCommas } from './calculation'
 
-const defaultQuantity = localStorage.getItem('quantity') || ''
-const defaultInitialPrice = localStorage.getItem('initialPrice') || ''
-const defaultCurrentPrice = localStorage.getItem('currentPrice') || ''
+const defaultQuantity = parseFloat(localStorage.getItem('quantity') || '')
+const defaultInitialPrice = parseFloat(localStorage.getItem('initialPrice') || '')
+const defaultCurrentPrice = parseFloat(localStorage.getItem('currentPrice') || '')
 const defaultHistory = localStorage.getItem('history') || '[]'
 
 const Turnip = (): JSX.Element => {
-  const [quantity, setQuantity] = React.useState<string>(defaultQuantity)
-  const [initialPrice, setInitialPrice] = React.useState<string>(defaultInitialPrice)
-  const [currentPrice, setCurrentPrice] = React.useState<string>(defaultCurrentPrice)
+  const [quantity, setQuantity] = React.useState<number | undefined>(defaultQuantity)
+  const [initialPrice, setInitialPrice] = React.useState<number | undefined>(defaultInitialPrice)
+  const [currentPrice, setCurrentPrice] = React.useState<number | undefined>(defaultCurrentPrice)
   const [history, setHistory] = React.useState<string>(defaultHistory)
 
   const fields = [
     {
       label: 'Quantity',
       value: quantity,
-      onChange: setQuantity,
+      setter: setQuantity,
       id: 'quantity',
     },
     {
       label: 'Initial price',
       value: initialPrice,
-      onChange: setInitialPrice,
+      setter: setInitialPrice,
       id: 'initialPrice',
     },
     {
       label: 'Current price',
       value: currentPrice,
-      onChange: setCurrentPrice,
+      setter: setCurrentPrice,
       id: 'currentPrice',
     },
   ]
 
-  const quantityNumber = parseFloat(quantity) || 0
-  const initialPriceNumber = parseFloat(initialPrice) || 0
-  const currentPriceNumber = parseFloat(currentPrice) || 0
+  const quantityNumber = quantity || 0
+  const initialPriceNumber = initialPrice || 0
+  const currentPriceNumber = currentPrice || 0
 
   const {
     gross,
@@ -54,9 +54,9 @@ const Turnip = (): JSX.Element => {
 
   const onReset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.preventDefault()
-    setQuantity('')
-    setInitialPrice('')
-    setCurrentPrice('')
+    setQuantity(undefined)
+    setInitialPrice(undefined)
+    setCurrentPrice(undefined)
     fields.forEach((f) => localStorage.removeItem(f.id))
   }
 
@@ -77,8 +77,15 @@ const Turnip = (): JSX.Element => {
     localStorage.setItem('history', newHistoryString)
   }
 
-  const noInput = quantity.length === 0 && initialPrice.length === 0 && currentPrice.length === 0
+  const noInput = (quantity === 0 || undefined)&& (initialPrice === 0 || undefined) && (currentPrice === 0 || undefined)
   const noData = investment === 0 && profit === 0 && gross === 0
+
+  const selectAll = (e: React.MouseEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>): void => {
+    const t = e.currentTarget
+    setTimeout(() => {
+      t.select()
+    }, 100)
+  }
 
   return (
     <>
@@ -86,10 +93,12 @@ const Turnip = (): JSX.Element => {
       <main className='app'>
         <form id='inputs' className='half'>
           {fields.map((f) => {
-            const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-              const newValue = e.target.value.replace(/[a-zA-Z]/gi, '')
-              f.onChange(newValue)
-              localStorage.setItem(f.id, newValue)
+            const onChange = (
+              setter: React.Dispatch<React.SetStateAction<number | undefined>>
+            ) => (e: React.ChangeEvent<HTMLInputElement>): void => {
+              const newValue = parseFloat(e.currentTarget.value || '0')
+              setter(newValue)
+              localStorage.setItem(f.id, (newValue).toString())
             }
             return (
               <label key={f.id}>
@@ -97,10 +106,14 @@ const Turnip = (): JSX.Element => {
                 <input
                   id={f.id}
                   name={f.id}
-                  onChange={onChange}
-                  type={'text'}
+                  onChange={onChange(f.setter)}
+                  type={'number'}
+                  inputMode={'decimal'}
                   pattern={'[0-9]*'}
-                  value={f.value}
+                  value={f.value || 0}
+                  min={0}
+                  onFocus={selectAll}
+                  onClick={selectAll}
                 />
               </label>
             )})}
