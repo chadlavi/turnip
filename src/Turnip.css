@@ -1,3 +1,5 @@
+@import './elevations.css';
+
 :root {
   --background: white;
   --button: #ddd;
@@ -8,7 +10,7 @@
   --main-width: 760px;
   --zebra: #f2f2f2;
   --results-background: var(--background);
-  --results-shadow: #8884;
+  --results-shadow: #8882;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -141,7 +143,7 @@ button#save-button:not(:disabled) {
   margin-top: 16px;
   padding-left: 16px;
   padding-right: 16px;
-  box-shadow: 2px 3px 5px 2px var(--results-shadow);
+  /* box-shadow: 1px 2px 5px 2px var(--results-shadow); */
 }
 
 .good {
@@ -192,8 +194,14 @@ th, td {
   padding: 8px;
 }
 
-tr:nth-child(even) {
+tr:nth-child(even) td {
   background-color: var(--zebra);
+}
+tr:nth-child(even) td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+tr:nth-child(even) td:last-child {
+  border-radius: 0 8px 8px 0;
 }
 
 @media (max-width: 600px) {

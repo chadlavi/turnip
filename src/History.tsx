@@ -34,6 +34,7 @@ export const History = (
         <button
           id='clear-history-button'
           onClick={onClearHistory}
+          className={'elevation-1'}
         >
           delete all
         </button>

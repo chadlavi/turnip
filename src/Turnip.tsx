@@ -62,7 +62,8 @@ const Turnip = (): JSX.Element => {
 
   const onSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.preventDefault()
-    const history: History = JSON.parse(localStorage.getItem('history') || '[]')
+    const currentHistory = JSON.parse(localStorage.getItem('history') || '')
+    const history: History = currentHistory instanceof Array ? currentHistory : []
     const newHistory: History = [
       ...history,
       {
@@ -77,7 +78,10 @@ const Turnip = (): JSX.Element => {
     localStorage.setItem('history', newHistoryString)
   }
 
-  const noInput = (quantity === 0 || undefined)&& (initialPrice === 0 || undefined) && (currentPrice === 0 || undefined)
+  const noInput = (quantity === 0 || quantity === undefined) 
+    && (initialPrice === 0 || initialPrice === undefined) 
+    && (currentPrice === 0 || currentPrice === undefined)
+
   const noData = investment === 0 && profit === 0 && gross === 0
 
   const selectAll = (e: React.MouseEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>): void => {
@@ -123,13 +127,14 @@ const Turnip = (): JSX.Element => {
               onClick={onReset}
               disabled={noInput}
               type={'button'}
+              className={noInput ? undefined : 'elevation-1'}
             >
               reset fields
             </button>
           </p>
         </form>
         <div className='half'>
-          <div id='results'>
+          <div className='elevation-4' id='results'>
             <div>
               <p>
               Investment: {numberWithCommas(investment)}
@@ -146,6 +151,7 @@ const Turnip = (): JSX.Element => {
                 id='save-button'
                 onClick={onSave}
                 disabled={noData}
+                className={noData ? undefined : 'elevation-2'}
               >
                 save
               </button>
