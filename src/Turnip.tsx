@@ -62,7 +62,7 @@ const Turnip = (): JSX.Element => {
 
   const onSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.preventDefault()
-    const currentHistory = JSON.parse(localStorage.getItem('history') || '')
+    const currentHistory = JSON.parse(localStorage.getItem('history') || '[]')
     const history: History = currentHistory instanceof Array ? currentHistory : []
     const newHistory: History = [
       ...history,
