@@ -110,7 +110,7 @@ const Turnip = (): JSX.Element => {
                   type={'number'}
                   inputMode={'decimal'}
                   pattern={'[0-9]*'}
-                  value={f.value || 0}
+                  value={f.value || ''}
                   min={0}
                   onFocus={selectAll}
                   onClick={selectAll}
