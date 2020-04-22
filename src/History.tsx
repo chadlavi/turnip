@@ -36,7 +36,7 @@ export const History = (
           onClick={onClearHistory}
           className={'elevation-1'}
         >
-          delete all
+          Delete all
         </button>
       </h2>
       <div id='history-container'>

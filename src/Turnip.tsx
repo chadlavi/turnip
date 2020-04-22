@@ -129,7 +129,7 @@ const Turnip = (): JSX.Element => {
               type={'button'}
               className={noInput ? undefined : 'elevation-1'}
             >
-              reset fields
+              Reset fields
             </button>
           </p>
         </form>
@@ -153,7 +153,7 @@ const Turnip = (): JSX.Element => {
                 disabled={noData}
                 className={noData ? undefined : 'elevation-2'}
               >
-                save
+                Save
               </button>
 
             </p>
