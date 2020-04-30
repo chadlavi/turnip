@@ -2,9 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Turnip from './Turnip'
 import * as serviceWorker from './serviceWorker'
+import { CSSVariables, GlobalStyles } from '@chadlavi/clear'
 
 ReactDOM.render(
   <React.StrictMode>
+    <CSSVariables/>
+    <GlobalStyles/>
     <Turnip />
   </React.StrictMode>,
   document.getElementById('root')

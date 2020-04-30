@@ -2,6 +2,16 @@ import React from 'react'
 import './Turnip.css'
 import { History } from './History'
 import { calculate, numberWithCommas } from './calculation'
+import {
+  Page,
+  Header,
+  Grid,
+  GridItem,
+  Input,
+  Button,
+  Link,
+  Paragraph,
+} from '@chadlavi/clear'
 
 const defaultQuantity = parseFloat(localStorage.getItem('quantity') || '')
 const defaultInitialPrice = parseFloat(localStorage.getItem('initialPrice') || '')
@@ -93,83 +103,90 @@ const Turnip = (): JSX.Element => {
 
   return (
     <>
-      <h1>Turnip calc</h1>
-      <main className='app'>
-        <form id='inputs' className='half'>
-          {fields.map((f) => {
-            const onChange = (
-              setter: React.Dispatch<React.SetStateAction<number | undefined>>
-            ) => (e: React.ChangeEvent<HTMLInputElement>): void => {
-              const newValue = parseFloat(e.currentTarget.value || '0')
-              setter(newValue)
-              localStorage.setItem(f.id, (newValue).toString())
-            }
-            return (
-              <label key={f.id}>
-                <span>{f.label}</span>
-                <input
-                  id={f.id}
-                  name={f.id}
-                  onChange={onChange(f.setter)}
-                  type={'number'}
-                  inputMode={'decimal'}
-                  pattern={'[0-9]*'}
-                  value={f.value || ''}
-                  min={0}
-                  onFocus={selectAll}
-                  onClick={selectAll}
-                />
-              </label>
-            )})}
-          <p className='button-row'>
-            <button
-              id='clear-button'
-              onClick={onReset}
-              disabled={noInput}
-              type={'button'}
-              className={noInput ? undefined : 'elevation-1'}
-            >
-              Reset fields
-            </button>
-          </p>
-        </form>
-        <div className='half'>
-          <div className='elevation-4' id='results'>
-            <div>
-              <p>
-              Investment: {numberWithCommas(investment)}
-              </p>
-              <p>
-              Gross: {numberWithCommas(gross)}
-              </p>
-              <p className={profitable ? 'good' : lossful ? 'bad' : undefined}>
-                {!lossful ? 'Profit' : 'Loss'}: {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
-              </p>
+      <Page>
+        <Grid spacing={8}>
+          <GridItem>
+            <Header>Turnip calc</Header>
+          </GridItem>
+          <GridItem size={6}>
+            <Grid spacing={8}>
+              {fields.map((f) => {
+                const onChange = (
+                  setter: React.Dispatch<React.SetStateAction<number | undefined>>
+                ) => (e: React.ChangeEvent<HTMLInputElement>): void => {
+                  const newValue = parseFloat(e.currentTarget.value || '0')
+                  setter(newValue)
+                  localStorage.setItem(f.id, (newValue).toString())
+                }
+                return (
+                  <GridItem key={f.id}>
+                    <Input
+                      id={f.id}
+                      name={f.id}
+                      onChange={onChange(f.setter)}
+                      type={'number'}
+                      inputMode={'decimal'}
+                      pattern={'[0-9]*'}
+                      value={f.value}
+                      min={0}
+                      onFocus={selectAll}
+                      onClick={selectAll}
+                      label={f.label}
+                    />
+                  </GridItem>
+                )})}
+              <GridItem className='button-row'>
+                <Button
+                  id='clear-button'
+                  onClick={onReset}
+                  disabled={noInput}
+                  className={noInput ? undefined : 'elevation-1'}
+                >
+                  Reset fields
+                </Button>
+              </GridItem>
+            </Grid>
+          </GridItem>
+          <GridItem size={6}>
+            <div className='elevation-4' id='results'>
+              <div>
+                <p>
+                Investment: {numberWithCommas(investment)}
+                </p>
+                <p>
+                Gross: {numberWithCommas(gross)}
+                </p>
+                <p className={profitable ? 'good' : lossful ? 'bad' : undefined}>
+                  {!lossful 
+                    ? 'Profit'
+                    : 'Loss'
+                  }: {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
+                </p>
+              </div>
+              <Paragraph className='button-row'>
+                <Button
+                  id='save-button'
+                  onClick={onSave}
+                  disabled={noData}
+                  primary
+                  className={noData ? undefined : 'elevation-2'}
+                >
+                  Save
+                </Button>
+              </Paragraph>
             </div>
-            <p className='button-row'>
-              <button
-                id='save-button'
-                onClick={onSave}
-                disabled={noData}
-                className={noData ? undefined : 'elevation-2'}
-              >
-                Save
-              </button>
-
-            </p>
-          </div>
-        </div>
-        <History setHistory={setHistory} history={JSON.parse(history)} />
-        <div className='github-link'>
-          <a
-            href='https://github.com/chadlavi/turnip'
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            https://github.com/chadlavi/turnip
-          </a>
-        </div>
-      </main>
+          </GridItem>
+          <GridItem>
+            <History setHistory={setHistory} history={JSON.parse(history)} />
+            <Paragraph className='github-link'>
+              Built with <Link href='https://chadlavi.github.io/clear/'>Clear</Link>{' \u00b7 '}
+              <Link href='https://github.com/chadlavi/turnip'>
+                https://github.com/chadlavi/turnip
+              </Link>
+            </Paragraph>
+          </GridItem>
+        </Grid>
+      </Page>
     </>
   )
 }

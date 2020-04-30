@@ -1,6 +1,18 @@
 import * as React from 'react'
 import { formatDate } from './date'
 import { calculate, numberWithCommas } from './calculation'
+import {
+  Button,
+  Header,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Grid,
+  GridItem,
+  ScrollContainer,
+} from '@chadlavi/clear'
 
 export interface HistoryItem {
     time: Date
@@ -28,77 +40,81 @@ export const History = (
   }
   
   return hasHistory ? (
-    <>
-      <h2 id='history-header'>
-        <span>Saved data&nbsp;</span>
-        <button
-          id='clear-history-button'
-          onClick={onClearHistory}
-          className={'elevation-1'}
-        >
-          Delete all
-        </button>
-      </h2>
-      <div id='history-container'>
-        <table>
-          <thead>
-            <tr>
-              <th>Quantity</th>
-              <th>Initial price</th>
-              <th>Sale price</th>
-              <th>Gross</th>
-              <th>Profit</th>
-              <th>Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {history
-              .sort((a, b) => (a && b) ? new Date(b.time).getTime() - new Date(a.time).getTime() : 0)
-              .map((h, i) => {
-                if (h){
-                  const {
-                    gross,
-                    lossful,
-                    profit,
-                    profitable,
-                    profitPercentage,
-                  } = calculate({
-                    quantity: h.quantity,
-                    initialPrice: h.initialPrice,
-                    currentPrice: h.currentPrice,
-                  })
-                  return (
-                    <tr key={h.time.toString() || i}>
-                      <td>
-                        {numberWithCommas(h.quantity)}
-                      </td>
-                      <td>
-                        {numberWithCommas(h.initialPrice)}
-                      </td>
-                      <td>
-                        {numberWithCommas(h.currentPrice)}
-                      </td>
-                      <td>
-                        {numberWithCommas(gross)}
-                      </td>
-                      <td
-                        className={profitable ? 'good' : lossful ? 'bad' : undefined}
-                      >
-                        {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
-                      </td>
-                      <td>
-                        {formatDate(new Date(h.time))}
-                      </td>
-                    </tr>
-                  )
-                } else {
-                  return ''
-                }
-              })
-            }
-          </tbody>
-        </table>
-      </div>
-    </>
+    <Grid>
+      <GridItem>
+        <Header as='h2'id='history-header'>
+          <span>Saved data&nbsp;</span>
+          <Button
+            id='clear-history-button'
+            onClick={onClearHistory}
+            className={'elevation-1'}
+          >
+            Delete all
+          </Button>
+        </Header>
+      </GridItem>
+      <GridItem>
+        <ScrollContainer direction='horizontal' contentMinWidth={728}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell as='th'>Quantity</TableCell>
+                <TableCell as='th'>Initial price</TableCell>
+                <TableCell as='th'>Sale price</TableCell>
+                <TableCell as='th'>Gross</TableCell>
+                <TableCell as='th'>Profit</TableCell>
+                <TableCell as='th'>Time</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {history
+                .sort((a, b) => (a && b) ? new Date(b.time).getTime() - new Date(a.time).getTime() : 0)
+                .map((h, i) => {
+                  if (h){
+                    const {
+                      gross,
+                      lossful,
+                      profit,
+                      profitable,
+                      profitPercentage,
+                    } = calculate({
+                      quantity: h.quantity,
+                      initialPrice: h.initialPrice,
+                      currentPrice: h.currentPrice,
+                    })
+                    return (
+                      <TableRow key={h.time.toString() || i}>
+                        <TableCell>
+                          {numberWithCommas(h.quantity)}
+                        </TableCell>
+                        <TableCell>
+                          {numberWithCommas(h.initialPrice)}
+                        </TableCell>
+                        <TableCell>
+                          {numberWithCommas(h.currentPrice)}
+                        </TableCell>
+                        <TableCell>
+                          {numberWithCommas(gross)}
+                        </TableCell>
+                        <TableCell
+                          className={profitable ? 'good' : lossful ? 'bad' : undefined}
+                        >
+                          {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
+                        </TableCell>
+                        <TableCell>
+                          {formatDate(new Date(h.time))}
+                        </TableCell>
+                      </TableRow>
+                    )
+                  } else {
+                    return ''
+                  }
+                })
+              }
+            </TableBody>
+          </Table>
+        </ScrollContainer>
+      </GridItem>
+    </Grid>
   ) : null
 }

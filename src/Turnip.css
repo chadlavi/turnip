@@ -1,165 +1,47 @@
 @import './elevations.css';
 
 :root {
-  --background: white;
-  --button: #ddd;
   --green: green;
-  --link: #55e;
-  --red: #e30101;
-  --text-color: #111;
-  --main-width: 760px;
-  --zebra: #f2f2f2;
   --results-background: var(--background);
-  --results-shadow: #8882;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #111;
-    --button: #555;
     --green: #02a402;
-    --link: #6c6cf0;
-    --red: #ff4747;
-    --text-color: white;
-    --zebra: #242424;
-    --results-background: var(--zebra);
-    --results-shadow: #0004;
+    --results-background: var(--clear-zebra);
   }
 }
 
-* {
-  box-sizing: border-box;
-}
-
-*:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--link);
-}
-
-body {
-  background-color: var(--background);
-  color: var(--text-color);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 16px;
-}
-
-h1, h2 {
-  padding-bottom: 16px;
-}
-
-h1, h2, main.app {
-  margin: auto;
-  max-width: var(--main-width);
-  width: 100%;
-}
-
-main.app {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding-bottom: 60px;
-}
-
-main.app > * {
-  flex-basis: 100%;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 1;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-main.app > .half {
-  display: flex;
-  flex-basis: 50%;
-}
-
-#inputs label {
-  display: block;
-  margin-bottom: 8px;
-}
-#inputs label span {
-  font-size: 80%;
-  display: block;
-  margin-bottom: 4px;
-  opacity: 0.8;
-}
-#inputs input {
-  -webkit-appearance: none;
-  background-color: var(--background);
-  border-radius: 8px;
-  border: 1px solid var(--button);
-  color: var(--text-color);
-  display: block;
-  font-size: inherit;
-  padding: 12px;
-  text-align: right;
-  width: 100%;
-}
-
-input[type=number] {
-  -moz-appearance:textfield;
-}
-
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-p.button-row {
+.button-row {
   display: flex;
   flex-direction: row-reverse;
 }
 
-button {
-  background: var(--button);
-  border-radius: 8px;
-  border: none;
-  color: inherit;
-  font-size: 0.8rem;
-  margin: 0;
-  padding: 8px 16px;
-}
-
-button:disabled {
-  opacity: 0.5;
-}
-
-button#save-button:not(:disabled) {
-  background-color: var(--link);
-  color: var(--background);
-}
-
 #results {
   background: var(--results-background);
-  border-radius: 16px;
+  border-radius: calc(var(--clear-unit) * 2);
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
   font-weight: bold;
   justify-content: space-between;
-  margin-bottom: 8px;
-  margin-top: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
-  /* box-shadow: 1px 2px 5px 2px var(--results-shadow); */
+  margin-bottom: var(--clear-unit);
+  margin-top: calc(var(--clear-unit) * 2);
+  padding-left: calc(var(--clear-unit) * 2);
+  padding-right: calc(var(--clear-unit) * 2);
+  height: calc(100% - var(--clear-unit));
 }
 
 .good {
   color: var(--green);
 }
 .bad {
-  color: var(--red);
-}
-
-a, a:visited {
-  color: var(--link);
+  color: var(--clear-error);
 }
 
 .github-link {
   text-align: right;
-  font-size: 80%;
+  font-size: var(--clear-font-size-label);
 }
 
 #history-header {
@@ -167,47 +49,5 @@ a, a:visited {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 24px;
-}
-
-#history-container {
-  overflow-x: auto;
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 16px;
-}
-
-table {
-  border-collapse: collapse;
-  flex-basis: 100%;
-  width: var(--main-width);
-}
-
-thead tr th {
-  font-weight: normal;
-  font-size: 0.8rem;
-  padding-bottom: 0;
-}
-
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) td {
-  background-color: var(--zebra);
-}
-tr:nth-child(even) td:first-child {
-  border-radius: 8px 0 0 8px;
-}
-tr:nth-child(even) td:last-child {
-  border-radius: 0 8px 8px 0;
-}
-
-@media (max-width: 600px) {
-  main.app > form, main.app > div, main.app .half {
-    flex-basis: 100%;
-    padding-left: 0;
-    padding-right: 0;
-  }
+  margin-top: calc(var(--clear-unit) * 3);
 }
