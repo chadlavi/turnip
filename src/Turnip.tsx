@@ -9,6 +9,7 @@ import {
   GridItem,
   Input,
   Button,
+  Label,
   Link,
   Paragraph,
 } from '@chadlavi/clear'
@@ -120,6 +121,7 @@ const Turnip = (): JSX.Element => {
                 }
                 return (
                   <GridItem key={f.id}>
+                    <Label htmlFor={f.id}>{f.label}</Label>
                     <Input
                       id={f.id}
                       name={f.id}
@@ -131,7 +133,6 @@ const Turnip = (): JSX.Element => {
                       min={0}
                       onFocus={selectAll}
                       onClick={selectAll}
-                      label={f.label}
                     />
                   </GridItem>
                 )})}
