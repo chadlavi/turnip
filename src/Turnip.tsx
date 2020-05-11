@@ -12,6 +12,7 @@ import {
   Label,
   Link,
   Paragraph,
+  Notification,
 } from '@chadlavi/clear'
 
 const defaultQuantity = parseFloat(localStorage.getItem('quantity') || '')
@@ -24,6 +25,7 @@ const Turnip = (): JSX.Element => {
   const [initialPrice, setInitialPrice] = React.useState<number | undefined>(defaultInitialPrice)
   const [currentPrice, setCurrentPrice] = React.useState<number | undefined>(defaultCurrentPrice)
   const [history, setHistory] = React.useState<string>(defaultHistory)
+  const [success, setSuccess] = React.useState<boolean>(false)
 
   const fields = [
     {
@@ -87,6 +89,7 @@ const Turnip = (): JSX.Element => {
     const newHistoryString = JSON.stringify(newHistory)
     setHistory(newHistoryString)
     localStorage.setItem('history', newHistoryString)
+    setSuccess(true)
   }
 
   const noInput = (quantity === 0 || quantity === undefined) 
@@ -164,7 +167,7 @@ const Turnip = (): JSX.Element => {
                   }: {numberWithCommas(profit)} ({profitable ? '+' : ''}{profitPercentage}%)
                 </p>
               </div>
-              <Paragraph className='button-row'>
+              <Paragraph as='div' className='button-row'>
                 <Button
                   id='save-button'
                   onClick={onSave}
@@ -174,6 +177,13 @@ const Turnip = (): JSX.Element => {
                 >
                   Save
                 </Button>
+                <Notification
+                  open={success}
+                  setOpen={setSuccess}
+                  mini
+                >
+                  Saved
+                </Notification>
               </Paragraph>
             </div>
           </GridItem>
