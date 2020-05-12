@@ -5,17 +5,17 @@
     "main.js.map": "/turnip/static/js/main.72208bcc.chunk.js.map",
     "runtime-main.js": "/turnip/static/js/runtime-main.affa5613.js",
     "runtime-main.js.map": "/turnip/static/js/runtime-main.affa5613.js.map",
-    "static/js/2.67873a45.chunk.js": "/turnip/static/js/2.67873a45.chunk.js",
-    "static/js/2.67873a45.chunk.js.map": "/turnip/static/js/2.67873a45.chunk.js.map",
+    "static/js/2.a787950d.chunk.js": "/turnip/static/js/2.a787950d.chunk.js",
+    "static/js/2.a787950d.chunk.js.map": "/turnip/static/js/2.a787950d.chunk.js.map",
     "index.html": "/turnip/index.html",
-    "precache-manifest.257b75f91a5762554063278411ddabf4.js": "/turnip/precache-manifest.257b75f91a5762554063278411ddabf4.js",
+    "precache-manifest.c0d392801c1c233767d141bbc951d0e0.js": "/turnip/precache-manifest.c0d392801c1c233767d141bbc951d0e0.js",
     "service-worker.js": "/turnip/service-worker.js",
     "static/css/main.db09d700.chunk.css.map": "/turnip/static/css/main.db09d700.chunk.css.map",
-    "static/js/2.67873a45.chunk.js.LICENSE.txt": "/turnip/static/js/2.67873a45.chunk.js.LICENSE.txt"
+    "static/js/2.a787950d.chunk.js.LICENSE.txt": "/turnip/static/js/2.a787950d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.affa5613.js",
-    "static/js/2.67873a45.chunk.js",
+    "static/js/2.a787950d.chunk.js",
     "static/css/main.db09d700.chunk.css",
     "static/js/main.72208bcc.chunk.js"
   ]
